@@ -1,32 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <title>Expense & Budget Visualizer</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Expense & Budget Visualizer</h1>
-    <h2>Total Balance: <span id="balance">0</span></h2>
+
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title">💰 Budget Tracker</h1>
+    </div>
+    <div class="header-right">
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark/light mode">🌙</button>
+    </div>
   </header>
 
-  <form id="expense-form">
-    <input type="text" id="item" placeholder="Item Name" required>
-    <input type="number" id="amount" placeholder="Amount" required>
-    <select id="category" required>
-      <option value="">Select Category</option>
-      <option value="Food">Food</option>
-      <option value="Transport">Transport</option>
-      <option value="Fun">Fun</option>
-    </select>
-    <button type="submit">Add Transaction</button>
-  </form>
+  <main class="container">
 
-  <ul id="transaction-list"></ul>
-  <canvas id="expense-chart"></canvas>
+    <!-- ===== BALANCE CARDS ===== -->
+    <section class="balance-section" aria-label="Balance summary">
+      <div class="card balance-card">
+        <p class="card-label">Total Balance</p>
+        <p class="card-value" id="balance">$0.00</p>
+      </div>
+      <div class="card income-card">
+        <p class="card-label">Income</p>
+        <p class="card-value" id="total-income">$0.00</p>
+      </div>
+      <div class="card expense-card">
+        <p class="card-label">Expenses</p>
+        <p class="card-value" id="total-expense">$0.00</p>
+      </div>
+    </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ===== SPENDING LIMIT BANNER ===== -->
+    <div id="limit-banner" class="limit-banner hidden" role="alert">
+      ⚠️ You've exceeded your monthly spending limit!
+    </div>
+
+    <!-- ===== ADD TRANSACTION ===== -->
+    <section class="card form-section" aria-label="Add transaction">
+      <h2 class="section-title">Add Transaction</h2>
+      <form id="expense-form" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="item">Description</label>
+            <input type="text" id="item" placeholder="e.g. Lunch" required autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input type="number" id="amount" placeholder="0.00" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" required>
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" required>
+              <!-- populated by JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Transaction</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== CUSTOM CATEGORIES ===== -->
+    <section class="card category-section" aria-label="Manage categories">
+      <h2 class="section-title">Manage Categories</h2>
+      <div class="category-manager">
+        <input type="text" id="new-category-input" placeholder="New category name" autocomplete="off" />
+        <button id="add-category-btn" class="btn btn-secondary">Add</button>
+      </div>
+      <div id="category-tags" class="category-tags"></div>
+    </section>
+
+    <!-- ===== SPENDING LIMIT ===== -->
+    <section class="card limit-section" aria-label="Spending limit">
+      <h2 class="section-title">Monthly Spending Limit</h2>
+      <div class="limit-manager">
+        <input type="number" id="limit-input" placeholder="Set limit (e.g. 1000)" min="0" step="0.01" />
+        <button id="set-limit-btn" class="btn btn-secondary">Set Limit</button>
+      </div>
+      <div class="limit-display">
+        <span id="limit-info">No limit set</span>
+        <div class="progress-bar-track" id="progress-track" style="display:none">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CHART ===== -->
+    <section class="card chart-section" aria-label="Spending chart">
+      <h2 class="section-title">Spending by Category</h2>
+      <div class="chart-wrapper">
+        <canvas id="expense-chart" aria-label="Pie chart of spending by category" role="img"></canvas>
+      </div>
+      <p id="chart-empty" class="empty-msg">No expense data yet.</p>
+    </section>
+
+    <!-- ===== MONTHLY SUMMARY ===== -->
+    <section class="card summary-section" aria-label="Monthly summary">
+      <div class="summary-header">
+        <h2 class="section-title">Monthly Summary</h2>
+        <div class="month-nav">
+          <button id="prev-month" class="icon-btn" aria-label="Previous month">◀</button>
+          <span id="month-label">—</span>
+          <button id="next-month" class="icon-btn" aria-label="Next month">▶</button>
+        </div>
+      </div>
+      <div id="monthly-stats" class="monthly-stats"></div>
+    </section>
+
+    <!-- ===== TRANSACTION HISTORY ===== -->
+    <section class="card history-section" aria-label="Transaction history">
+      <div class="history-header">
+        <h2 class="section-title">History</h2>
+        <div class="sort-controls">
+          <label for="sort-select">Sort by</label>
+          <select id="sort-select">
+            <option value="date-desc">Date (newest)</option>
+            <option value="date-asc">Date (oldest)</option>
+            <option value="amount-desc">Amount (high–low)</option>
+            <option value="amount-asc">Amount (low–high)</option>
+            <option value="category">Category (A–Z)</option>
+          </select>
+        </div>
+      </div>
+      <ul id="transaction-list" class="transaction-list">
+        <!-- populated by JS -->
+      </ul>
+      <p id="history-empty" class="empty-msg">No transactions yet. Add one above!</p>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>Expense &amp; Budget Visualizer — data stored locally in your browser</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
