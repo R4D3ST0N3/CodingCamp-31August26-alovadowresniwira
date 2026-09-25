@@ -31,7 +31,7 @@ It lets you add income and expenses, see your total balance, check your monthly 
 
 ### Live demo
 
-[View on GitHub Pages](https://r4d3st0n3.github.io/CodingCamp-22September26-alovadowresniwira/)
+[View on GitHub Pages](https://r4d3st0n3.github.io/CodingCamp-31August26-alovadowresniwira/)
 
 ### License
 
