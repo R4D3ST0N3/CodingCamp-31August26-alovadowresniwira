@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Budget Tracker by R.A.W.M</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,10 +16,14 @@
   <!-- Main app header -->
   <header class="app-header">
     <div class="header-left">
-      <h1 class="app-title">💰 Budget Tracker</h1>
+      <h1 class="app-title"><span class="title-mark" aria-hidden="true">$</span>Budget Tracker</h1>
     </div>
     <div class="header-right">
-      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark/light mode">🌙</button>
+      <nav class="app-nav" aria-label="Primary navigation">
+        <a class="nav-link active" href="index.html" aria-current="page">Tracker</a>
+        <a class="nav-link" href="tutorial.html">How it works</a>
+      </nav>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark/light mode">DARK</button>
     </div>
   </header>
 
@@ -40,11 +47,13 @@
 
     <!-- ===== SPENDING LIMIT BANNER ===== -->
     <div id="limit-banner" class="limit-banner hidden" role="alert">
-      ⚠️ You've exceeded your monthly spending limit!
+      You've exceeded your monthly spending limit.
     </div>
 
+    <div class="dashboard-grid">
+
     <!-- ===== ADD TRANSACTION ===== -->
-    <section class="card form-section" aria-label="Add transaction">
+    <section class="card form-section dashboard-wide" aria-label="Add transaction">
       <h2 class="section-title">Add Transaction</h2>
       <form id="expense-form" novalidate>
         <div class="form-grid">
@@ -128,7 +137,7 @@
     </section>
 
     <!-- ===== TRANSACTION HISTORY ===== -->
-    <section class="card history-section" aria-label="Transaction history">
+    <section class="card history-section dashboard-wide" aria-label="Transaction history">
       <div class="history-header">
         <h2 class="section-title">History</h2>
         <div class="sort-controls">
@@ -147,6 +156,8 @@
       </ul>
       <p id="history-empty" class="empty-msg">No transactions yet. Add one above!</p>
     </section>
+
+    </div>
 
   </main>
 

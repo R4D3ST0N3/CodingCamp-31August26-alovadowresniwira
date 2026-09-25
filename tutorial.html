@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Budget Tracker Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="tutorial-page">
+  <div class="page-decor decor-one" aria-hidden="true"></div>
+  <div class="page-decor decor-two" aria-hidden="true"></div>
+  <div class="watermark">R.A.W.M</div>
+
+  <header class="app-header">
+    <div class="header-left">
+      <h1 class="app-title"><span class="title-mark" aria-hidden="true">$</span>Budget Tracker</h1>
+    </div>
+    <div class="header-right">
+      <nav class="app-nav" aria-label="Primary navigation">
+        <a class="nav-link" href="index.html">Tracker</a>
+        <a class="nav-link active" href="tutorial.html" aria-current="page">How it works</a>
+      </nav>
+      <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark/light mode">DARK</button>
+    </div>
+  </header>
+
+  <main class="tutorial-container">
+    <section class="tutorial-intro">
+      <p class="eyebrow">A quick orientation</p>
+      <h2>Turn small entries into a clearer money picture.</h2>
+      <p class="intro-copy">Add what came in, record what went out, then use the dashboard to spot patterns before they become surprises.</p>
+      <a class="btn btn-primary intro-action" href="index.html">Open the tracker</a>
+    </section>
+
+    <section class="flow-panel" aria-labelledby="flow-title">
+      <div class="flow-heading">
+        <div>
+          <p class="eyebrow">The basic loop</p>
+          <h2 id="flow-title">One entry. Three useful signals.</h2>
+        </div>
+        <span class="flow-status">LIVE EXAMPLE</span>
+      </div>
+      <div class="tutorial-flow">
+        <div class="flow-step">
+          <div class="flow-screen screen-entry"><span class="screen-label">Lunch</span><span class="screen-amount">$12.50</span><span class="screen-line"></span></div>
+          <span class="flow-number">01</span>
+          <h3>Record it</h3>
+          <p>Enter the description, amount, type, category, and date.</p>
+        </div>
+        <span class="flow-arrow" aria-hidden="true">-&gt;</span>
+        <div class="flow-step">
+          <div class="flow-screen screen-balance"><span class="screen-label">Balance</span><span class="screen-amount">$487.50</span><span class="screen-line short"></span></div>
+          <span class="flow-number">02</span>
+          <h3>See the change</h3>
+          <p>Your totals update immediately, so the decision has context.</p>
+        </div>
+        <span class="flow-arrow" aria-hidden="true">-&gt;</span>
+        <div class="flow-step">
+          <div class="flow-screen screen-review"><span class="screen-label">Food</span><span class="screen-bar"></span><span class="screen-label">This month</span></div>
+          <span class="flow-number">03</span>
+          <h3>Review the pattern</h3>
+          <p>Use categories, limits, charts, and history to adjust course.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tutorial-cards" aria-label="Tracker area guide">
+      <article class="tutorial-card card-demo-form">
+        <div class="tutorial-card-copy"><span class="tutorial-index">01 / INPUT</span><h2>Add Transaction</h2><p>Every useful summary begins with a small, specific entry.</p></div>
+        <div class="mini-form" aria-hidden="true"><span>coffee</span><strong>$4.80</strong><i></i></div>
+      </article>
+      <article class="tutorial-card card-demo-balance">
+        <div class="tutorial-card-copy"><span class="tutorial-index">02 / SIGNAL</span><h2>Balance Summary</h2><p>Income, expenses, and the remaining balance stay visible at a glance.</p></div>
+        <div class="mini-balance" aria-hidden="true"><span>$487.50</span><i></i><b></b></div>
+      </article>
+      <article class="tutorial-card card-demo-limit">
+        <div class="tutorial-card-copy"><span class="tutorial-index">03 / GUARDRAIL</span><h2>Spending Limit</h2><p>Set a monthly boundary and let the progress bar show how close you are.</p></div>
+        <div class="mini-limit" aria-hidden="true"><span></span><i></i><b></b></div>
+      </article>
+      <article class="tutorial-card card-demo-history">
+        <div class="tutorial-card-copy"><span class="tutorial-index">04 / REVIEW</span><h2>Chart &amp; History</h2><p>Compare categories and revisit the exact entries behind the totals.</p></div>
+        <div class="mini-history" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </article>
+    </section>
+
+    <section class="tutorial-next">
+      <p class="eyebrow">Ready when you are</p>
+      <h2>Start with one transaction.</h2>
+      <a class="text-link" href="index.html">Go to the tracker <span aria-hidden="true">-&gt;</span></a>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Budget Tracker by Raden Alovado Wresniwira Mahaghaniyy</p>
+    <p class="brand-mark">R.A.W.M</p>
+  </footer>
+  <script src="js/tutorial.js"></script>
+</body>
+</html>

@@ -83,22 +83,9 @@ function todayDateString() {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-/** Category → emoji icon */
-const CATEGORY_ICONS = {
-  food:          '🍔',
-  transport:     '🚗',
-  entertainment: '🎉',
-  health:        '💊',
-  shopping:      '🛍️',
-  bills:         '🧾',
-  other:         '📦',
-  income:        '💵',
-};
-
 function getCategoryIcon(category, type) {
-  if (type === 'income') return CATEGORY_ICONS.income;
-  const key = category.toLowerCase();
-  return CATEGORY_ICONS[key] || '📌';
+  if (type === 'income') return '+';
+  return category.trim().charAt(0).toUpperCase() || '?';
 }
 
 /* Get page elements */
@@ -147,7 +134,7 @@ const dom = {
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  dom.themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+  dom.themeToggle.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
   dom.themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
   state.theme = theme;
 
@@ -293,8 +280,8 @@ function updateBalanceSummary() {
 
 // A fixed palette — cycles if there are more categories than colours
 const CHART_PALETTE = [
-  '#6c63ff','#ef4444','#22c55e','#f59e0b','#3b82f6',
-  '#ec4899','#14b8a6','#f97316','#8b5cf6','#06b6d4',
+  '#d86b3f','#1d7a72','#d7a33d','#3e6888','#a34f65',
+  '#66805c','#c88755','#4c5967','#9b7a52','#2e7770',
 ];
 
 function updateChart() {
@@ -347,7 +334,7 @@ function updateChart() {
           labels: {
             color: textColor,
             padding: 14,
-            font: { size: 13, family: "'Segoe UI', system-ui, sans-serif" },
+            font: { size: 13, family: "'Space Grotesk', sans-serif" },
             usePointStyle: true,
           },
         },
