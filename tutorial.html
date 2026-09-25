@@ -97,6 +97,38 @@
     <p>Budget Tracker by Raden Alovado Wresniwira Mahaghaniyy</p>
     <p class="brand-mark">R.A.W.M</p>
   </footer>
-  <script src="js/tutorial.js"></script>
+  <script>
+    'use strict';
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('budgetAppState');
+    let savedState = {};
+    let theme = 'light';
+
+    if (savedTheme) {
+      try {
+        savedState = JSON.parse(savedTheme);
+        theme = savedState.theme || 'light';
+      } catch {
+        savedState = {};
+        theme = 'light';
+      }
+    }
+
+    function applyTheme(nextTheme) {
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      themeToggle.textContent = nextTheme === 'dark' ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-label', nextTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      theme = nextTheme;
+    }
+
+    themeToggle.addEventListener('click', () => {
+      applyTheme(theme === 'light' ? 'dark' : 'light');
+      savedState.theme = theme;
+      localStorage.setItem('budgetAppState', JSON.stringify(savedState));
+    });
+
+    applyTheme(theme);
+  </script>
 </body>
 </html>
