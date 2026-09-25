@@ -1,13 +1,11 @@
-/* ============================================================
-   EXPENSE & BUDGET VISUALIZER — script.js
-   Vanilla JS, LocalStorage only, no frameworks
-   ============================================================ */
+/* Simple budget tracker script.
+   This file keeps the app data in the browser and updates the page.
+   Project by Raden Alovado Wresniwira Mahaghaniyy (R.A.W.M).
+*/
 
 'use strict';
 
-/* ─────────────────────────────────────────────
-   1. STATE
-   ───────────────────────────────────────────── */
+/* App state */
 
 const DEFAULT_CATEGORIES = ['Food', 'Transport', 'Entertainment', 'Health', 'Shopping', 'Bills', 'Other'];
 
@@ -21,9 +19,7 @@ let state = {
 
 let chartInstance = null;
 
-/* ─────────────────────────────────────────────
-   2. PERSISTENCE
-   ───────────────────────────────────────────── */
+/* Save and load app data */
 
 function loadState() {
   const raw = localStorage.getItem('budgetAppState');
@@ -53,9 +49,7 @@ function saveState() {
   }));
 }
 
-/* ─────────────────────────────────────────────
-   3. UTILITIES
-   ───────────────────────────────────────────── */
+/* Helper functions */
 
 function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -107,9 +101,7 @@ function getCategoryIcon(category, type) {
   return CATEGORY_ICONS[key] || '📌';
 }
 
-/* ─────────────────────────────────────────────
-   4. DOM REFERENCES
-   ───────────────────────────────────────────── */
+/* Get page elements */
 
 const $ = id => document.getElementById(id);
 
@@ -151,9 +143,7 @@ const dom = {
   themeToggle:    $('theme-toggle'),
 };
 
-/* ─────────────────────────────────────────────
-   5. THEME
-   ───────────────────────────────────────────── */
+/* Theme switch */
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
@@ -171,9 +161,7 @@ dom.themeToggle.addEventListener('click', () => {
   saveState();
 });
 
-/* ─────────────────────────────────────────────
-   6. CATEGORIES
-   ───────────────────────────────────────────── */
+/* Category list */
 
 function populateCategorySelect() {
   const current = dom.categorySelect.value;
@@ -238,9 +226,7 @@ dom.categoryTags.addEventListener('click', e => {
   if (btn) removeCategory(btn.dataset.cat);
 });
 
-/* ─────────────────────────────────────────────
-   7. SPENDING LIMIT
-   ───────────────────────────────────────────── */
+/* Monthly spending limit */
 
 function updateLimitUI() {
   const limit = state.spendingLimit;
@@ -291,9 +277,7 @@ dom.limitInput.addEventListener('keydown', e => {
   }
 });
 
-/* ─────────────────────────────────────────────
-   8. BALANCE SUMMARY
-   ───────────────────────────────────────────── */
+/* Balance cards */
 
 function updateBalanceSummary() {
   const income  = state.transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
@@ -305,9 +289,7 @@ function updateBalanceSummary() {
   dom.balance.textContent      = (balance < 0 ? '-' : '') + formatCurrency(balance);
 }
 
-/* ─────────────────────────────────────────────
-   9. CHART (Chart.js pie)
-   ───────────────────────────────────────────── */
+/* Spending chart */
 
 // A fixed palette — cycles if there are more categories than colours
 const CHART_PALETTE = [
@@ -379,9 +361,7 @@ function updateChart() {
   });
 }
 
-/* ─────────────────────────────────────────────
-   10. MONTHLY SUMMARY
-   ───────────────────────────────────────────── */
+/* Monthly summary */
 
 function offsetMonth(key, delta) {
   const [year, month] = key.split('-').map(Number);
@@ -429,9 +409,7 @@ dom.nextMonth.addEventListener('click', () => {
   renderMonthlySummary();
 });
 
-/* ─────────────────────────────────────────────
-   11. TRANSACTION LIST (with sorting & limit highlight)
-   ───────────────────────────────────────────── */
+/* Transaction list and sorting */
 
 function getSortedTransactions() {
   const sort = dom.sortSelect.value;
@@ -512,9 +490,7 @@ function escapeHtml(str) {
 
 dom.sortSelect.addEventListener('change', renderTransactionList);
 
-/* ─────────────────────────────────────────────
-   12. ADD TRANSACTION FORM
-   ───────────────────────────────────────────── */
+/* Add transaction form */
 
 dom.form.addEventListener('submit', e => {
   e.preventDefault();
@@ -555,9 +531,7 @@ function showFormError(msg) {
   err._timer = setTimeout(() => err.remove(), 3000);
 }
 
-/* ─────────────────────────────────────────────
-   13. RENDER ALL
-   ───────────────────────────────────────────── */
+/* Update everything on screen */
 
 function renderAll() {
   updateBalanceSummary();
@@ -567,9 +541,7 @@ function renderAll() {
   renderTransactionList();
 }
 
-/* ─────────────────────────────────────────────
-   14. INIT
-   ───────────────────────────────────────────── */
+/* Start the app */
 
 function init() {
   loadState();

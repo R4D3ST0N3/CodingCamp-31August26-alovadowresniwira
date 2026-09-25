@@ -1,60 +1,39 @@
-# CodingCamp-22September26-alovadowresniwira
+# Budget Tracker
 
-#### **Expense \& Budget Visualizer**
+## Made by Raden Alovado Wresniwira Mahaghaniyy (R.A.W.M)
 
+This project is a simple money tracker made to help with daily spending.
 
+It lets you add income and expenses, see your total balance, check your monthly limit, and view a chart of spending by category.
 
-A simple, mobile‑friendly web app built during **RevoU Coding Camp** to track daily spending.
+### What this app does
 
-It shows your total balance, a history of transactions, and a pie chart of spending by category.
+- Add a transaction with a name, amount, type, category, and date
+- See your total income, total expenses, and remaining balance
+- Save your data in the browser so it stays after refresh
+- Use a monthly summary to track spending by month
+- Change category names and switch between light and dark mode
 
+### Tools used
 
+- HTML for the page layout
+- CSS for design and colors
+- JavaScript for the logic
+- Chart.js for the pie chart
+- Local Storage for saving data
 
-##### Features
+### Extra features
 
-\- Add transactions with **Item Name, Amount, Category**
+- Dark mode
+- Custom categories
+- Spending limit warning
+- Monthly summary
 
-\- Scrollable transaction list with delete option
+### Live demo
 
-\- Auto‑updating **Total Balance**
+[View on GitHub Pages](https://r4d3st0n3.github.io/CodingCamp-22September26-alovadowresniwira/)
 
-\- Pie chart visualization using **Chart.js**
-
-\- Data persistence with **Local Storage** (transactions remain after refresh)
-
-##### 
-
-##### Tech Stack
-
-\- **HTML** for structure
-
-\- **CSS** for styling
-
-\- **Vanilla JavaScript** for logic
-
-\- **Chart.js** for visualization
-
-\- **Local Storage API** for client‑side data
-
-
-
-##### **Optional Challenges Implemented**
-
-\- Dark/Light mode toggle \*(if you add it)\*
-
-\- Custom categories \*(if you add it)\*
-
-\- Monthly summary \*(if you add it)\*
-
-
-
-##### **Live Demo**
-
-\[View on GitHub Pages](https://r4d3st0n3.github.io/CodingCamp-22September26-alovadowresniwira/)
-
-
-
-**License**
+### License
 
 This project is licensed under the MIT License.
 
